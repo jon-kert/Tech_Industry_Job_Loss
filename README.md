@@ -89,8 +89,8 @@ The figure below is a heatmap which represents a pivot table that aggregates the
 
 <iframe
 src="assets/fig_agg.html"
-width="1200"
-height="1000"
+width="800"
+height="600"
 frameborder="0"
 ></iframe>
 
