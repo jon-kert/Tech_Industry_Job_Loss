@@ -29,6 +29,14 @@ Features:
 
 ## Data Cleaning and Exploratory Data Analysis
 
+Our process for cleaning involved several steps:
+
+1. We converted the date into timestamp form
+2. Turned the 'Money_Raised_in_$_mil' column into numerical data
+4. Drop values where the 'company_size_before_layoffs' is missing
+
+In dealing with missing values in 'Money_Raised_in_$_mil', we imputed the missing values with the average value of the closest observation match by 'Industry' and 'Stage'. If there were no such match, we used the average value of an observation matched by 'Industry'.
+
 
 ### Univariate Analysis (a)
 In the plotly histogram below, it can be seen that the distribution of layoff events categorized by the stage of the company (i.e. Series H, Post-IPO, etc.). Most of the reductions in the workforce seem to be happening in Post-IPO companies, which are bigger companies that have gone through multiple rounds of investment and are established(hold good amount of market share) in their respective industry. This makes sense because Post-IPO companies are more subjective to layoffs due to pressure from the market/industry. Contributing to our research question, this graph shows that there could be a correlation or indication of high percentage of layoffs given the company's stage as there are more occurences of layoffs.
@@ -55,13 +63,9 @@ frameborder="0"
 ### Bivariate Analysis (a)
 The graph below correlates the total amount of workers laid off by year and quarter. For reference, the quarters refer to the following range of months:
 
-
 >'Q1' : January 1st - March 31st
->
 >'Q2' : April 1st - June 30th
->
 >'Q3' : July 1st - September 30th
->
 >'Q4' : October 1st - December 31st
 
 From the graph below it can be seen that the overall trend of workers laid off seem to have **spiked in 2023 and 2020 during this 4 year period**. There could be a multitude of including broader economic and political factors that cannot be predicted. For instance, the initial shock between 2020 Q1 to 2020 Q3 can be attributed to the emergence of Covid-19 forcing many companies to let go of their employees as a result of economic shock. In 2023 Q1, the spike could be attributed to tech layoffs that resulted from the mass hiring spree that companies went on in the years prior. After further investigation, we have come to the conclusion that the different quarters would not be a useful predictor mainly because of the unpredictability of real life events that may heighten the amount of layoffs in a quarter.
@@ -97,10 +101,50 @@ frameborder="0"
 
 ### Imputations
 
+Since we are not using all of the columns in the data set, we started off by only extracting the columns we need and dropping ones that are irrelevant to our data analysis. During our preliminary data analysis, we discovered that some of the columns contain missing data. Here are the numbers below:
+- 'Laid_Off': 107
+- 'Percentage': 102
+- 'Company_Size_before_Layoffs': 161
+- 'Company_Size_after_layoffs': 136
+- 'Money_Raised_in_$_mil': 76
+
+
+In order to tackle the problem, we took on each feature individually.
+
+
+***Before***: Distribution of Money Raised in millions USD
+For the Money_Raised_in_$_mil column we realized that some of the values were missing mainly for industries that have sensitive data such as Healthcare or other industrieswith private organizations. In order to fill in for the data without any bias, we decided to impute using a grouped mean imputation. This imputation filled in the missing values of the column with the mean of the corresponding industry and stage of the data set. We wanted to make sure that we filled in the values that best reflected the company's current attributes.
+
+
+After that this initial imputation, we realized that 3 of the values were still missing as there was no such combination of industry and stage so we decided to impute using only the industry. We used industry instead of size mainly because of the differences in markets. For instance a seed company in the healthcare industry might make more money than a seed in the security industry.
+
+--GRAPH--
+
+***After***: Distribution of Money Raised in millions USD
+
+As can be seen from the graphs below and above, the distribution of the Money Raised doen't really change. The mean decreases 2 million while everything else remains the same. There is no big change when we imputate the column
+
+--GRAPH--
+
+***Before***: Distribution of Company Size before layoffs
+
+
+We decided to drop the missing values that do not have the company size before layoffs mainly because it serves no use in trying to discover the affect that company characteristics have on the percentage of layoffs within a company. During our investigation, we discovered that all the rows with missing values in this column specificall, had missing values in the percentage and Company size after layoffs column. Although we are dropping some of our data, the distribution as well as the median do not change, meaning that dropping these datapoints would have no significant impact on our overall data.
+
+--GRAPH--
+
+
+
 ---
 
 ## Framing A Prediction Problem
 
+Our goal was to predict the 'Percentage' column, a numerical feature that represents the proportion of workers laid off at a particular company. By focusing on this target, we aim to identify which features most significantly influence job loss across various industries. This is a regression problem as we are interested in any possible correlations between numerous features and the layoff percentage.
+
+We selected Root Mean Square Error (RMSE) as our evaluation metric because it works well with measuring error in predictions related to percentage values. RMSE provides a clear quantification of prediction accuracy by penalizing larger errors more heavily, making it particularly effective for capturing deviations in our continuous target variable. Thus, RMSE will provide a meaningful assessment of our model's performance in this context.
+
 ## Baseline Model
+
+In our baseline model
 
 ## Final Model
