@@ -176,9 +176,9 @@ height="600"
 frameborder="0"
 ></iframe>
 
-![Baseline](Baseline.png)
+![Baseline](assets/Baseline.png)
 
-'''
+```python
 X = tech_layoffs_cleaned[['Money_Raised_in_$_mil', 'Stage', 'Company_Size_before_Layoffs', 'Industry']]
 y = tech_layoffs_cleaned['Percentage']
 X_train, X_test, y_train, y_test = train_test_split(
@@ -199,7 +199,7 @@ y_pred = model.predict(X_test)
 rmse = np.sqrt(mean_squared_error(y_pred, y_test))
 
 print('rmse:',rmse,'%')
-'''
+```
 
 
 ## Final Model
@@ -207,4 +207,5 @@ print('rmse:',rmse,'%')
 
 
 
-![Final_Model](FinalModel.png)
+
+![Final_Model](assets/FinalModel.png)
