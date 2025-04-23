@@ -118,21 +118,42 @@ For the Money_Raised_in_$_mil column we realized that some of the values were mi
 
 After that this initial imputation, we realized that 3 of the values were still missing as there was no such combination of industry and stage so we decided to impute using only the industry. We used industry instead of size mainly because of the differences in markets. For instance a seed company in the healthcare industry might make more money than a seed in the security industry.
 
---GRAPH--
+<iframe
+src="assets/moneyRaised_Before.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
 
 ***After***: Distribution of Money Raised in millions USD
 
 As can be seen from the graphs below and above, the distribution of the Money Raised doen't really change. The mean decreases 2 million while everything else remains the same. There is no big change when we imputate the column
 
---GRAPH--
+<iframe
+src="assets/moneyRaised_After.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
 
 ***Before***: Distribution of Company Size before layoffs
 
 
 We decided to drop the missing values that do not have the company size before layoffs mainly because it serves no use in trying to discover the affect that company characteristics have on the percentage of layoffs within a company. During our investigation, we discovered that all the rows with missing values in this column specificall, had missing values in the percentage and Company size after layoffs column. Although we are dropping some of our data, the distribution as well as the median do not change, meaning that dropping these datapoints would have no significant impact on our overall data.
 
---GRAPH--
+<iframe
+src="assets/companySize_Before.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
 
+<iframe
+src="assets/companySize_After.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
 
 
 ---
@@ -144,6 +165,40 @@ Our goal was to predict the 'Percentage' column, a numerical feature that repres
 We selected Root Mean Square Error (RMSE) as our evaluation metric because it works well with measuring error in predictions related to percentage values. RMSE provides a clear quantification of prediction accuracy by penalizing larger errors more heavily, making it particularly effective for capturing deviations in our continuous target variable. Thus, RMSE will provide a meaningful assessment of our model's performance in this context.
 
 ## Baseline Model
+
+For our baseline model we created a linear regression model that includes 2 numerical features, and 2 nominal features:
+1. 'Stage' and 'Industry' were both OneHotEncoded
+2. 'Money_Raised_in_$_mil' and 'Company_Size_before_Layoffs' were not altered, but were used to fit the model
+
+Through our exploratory data analysis we identified these four features as having trends that were worth noting. We speculate that the amount of money a company generates might serve as a strong indicator of its overall health and stability, as companies that generate higher revenues might be less suspectible to increasing layoff percentages. We also speculated that the company stage and industry could hold significant correlational value due to operational challenges that present themselves in each of these specific areas.
+
+
+
+'''
+X = tech_layoffs_cleaned[['Money_Raised_in_$_mil', 'Stage', 'Company_Size_before_Layoffs', 'Industry']]
+y = tech_layoffs_cleaned['Percentage']
+X_train, X_test, y_train, y_test = train_test_split(
+   X, y,
+   test_size=0.3,       # 20% test, 80% train
+   random_state=42      # for reproducibility
+)
+CheckPointTransformer = make_column_transformer(
+   (OneHotEncoder(drop='first'), ['Stage']),
+   (OneHotEncoder(drop='first'), ['Industry']),
+)
+model = make_pipeline(
+   CheckPointTransformer,
+   LinearRegression()
+)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+rmse = np.sqrt(mean_squared_error(y_pred, y_test))
+
+print('rmse:',rmse,'%')
+'''
+
+
+
 
 In our baseline model
 
