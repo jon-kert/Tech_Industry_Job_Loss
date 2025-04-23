@@ -113,7 +113,7 @@ In order to tackle the problem, we took on each feature individually.
 For the Money_Raised_in_$_mil column we realized that some of the values were missing mainly for industries that have sensitive data such as Healthcare or other industrieswith private organizations. In order to fill in for the data without any bias, we decided to impute using a grouped mean imputation. This imputation filled in the missing values of the column with the mean of the corresponding industry and stage of the data set. We wanted to make sure that we filled in the values that best reflected the company's current attributes.
 
 
-After that this initial imputation, we realized that 3 of the values were still missing as there was no such combination of industry and stage so we decided to impute using only the industry. We used industry instead of size mainly because of the differences in markets. For instance a seed company in the healthcare industry might make more money than a seed in the security industry.
+After that this initial imputation, we realized that 3 of the values were still missing as there was no such combination of industry and stage so we decided to impute using only the stage. We used industry instead of size mainly because of the differences in markets. For instance a seed company in the healthcare industry might make more money than a seed in the security industry.
 
 <iframe
 src="assets/moneyRaised_Before.html"
