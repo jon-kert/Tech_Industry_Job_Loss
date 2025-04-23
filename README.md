@@ -11,7 +11,7 @@ We wanted to tailor our project with the industries we are interested in pursuin
 The dataset we will be using for this project comes from kaggle and can be accessed through [this link](https://www.kaggle.com/datasets/ulrikeherold/tech-layoffs-2020-2024/data). The original dataset is from [layoffs.fyi](https://layoffs.fyi/). The data set captures layoff events in the tech sector from **2020** to **2024**, including both large-scale and smaller workforce reductions across a variety of companies and industries. The data set only contains one CSV file with 16 columns and 1672 observations.
 
 ## Research Question
-Our main research question is: **Is the number of workeforce reductions related to the year of the layoffs as well as geographical and company-level characteristics?**. Additionally, we aim to **predict the number of layoffs a company faces given the year, location, and company-level characterisitics**. These are the features that we will focus on in our investigation:
+Our main research question is: **Is the number of workeforce reductions related to the year of the layoffs as well as geographical and company-level characteristics?**. Additionally, we aim to **predict the layoff percentage a company faces given the year and company-level characterisitics**. These are the features that we will focus on in our investigation:
 
 Features:
 
@@ -19,9 +19,6 @@ Features:
 - "Industry" — Sector or type of tech company (e.g., fintech, SaaS)
 - "Money_Raised_in_$_mil" – Total funding raised in millions of USD.
 - "Company_Size_before_Layoffs" - The amount of employees before workforce reduction
-- "Country" – Country of company headquarters.
-- "Continent" – Broader regional classification.
-- "Location_HQ" – City or specific area of the headquarters, useful for identifying clusters or local economic patterns.
 - "Percentage" - This is the target variable that we are trying to predict. Given the features above, what is the severity of the layoffs?
 - "Laid-off" - This is also a target variable that is tangential to the percentage variable in that we are trying to predict the amount of employees laid off given the features above
 
@@ -172,7 +169,14 @@ For our baseline model we created a linear regression model that includes 2 nume
 
 Through our exploratory data analysis we identified these four features as having trends that were worth noting. We speculate that the amount of money a company generates might serve as a strong indicator of its overall health and stability, as companies that generate higher revenues might be less suspectible to increasing layoff percentages. We also speculated that the company stage and industry could hold significant correlational value due to operational challenges that present themselves in each of these specific areas.
 
+<iframe
+src="assets/companySize_After.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
 
+![Baseline](Baseline.png)
 
 '''
 X = tech_layoffs_cleaned[['Money_Raised_in_$_mil', 'Stage', 'Company_Size_before_Layoffs', 'Industry']]
@@ -198,8 +202,9 @@ print('rmse:',rmse,'%')
 '''
 
 
-
-
-In our baseline model
-
 ## Final Model
+
+
+
+
+![Final_Model](FinalModel.png)
