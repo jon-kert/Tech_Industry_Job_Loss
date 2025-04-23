@@ -33,13 +33,23 @@ Features:
 ### Univariate Analysis (a)
 In the plotly histogram below, it can be seen that the distribution of layoff events categorized by the stage of the company (i.e. Series H, Post-IPO, etc.). Most of the reductions in the workforce seem to be happening in Post-IPO companies, which are bigger companies that have gone through multiple rounds of investment and are established(hold good amount of market share) in their respective industry. This makes sense because Post-IPO companies are more subjective to layoffs due to pressure from the market/industry. Contributing to our research question, this graph shows that there could be a correlation or indication of high percentage of layoffs given the company's stage as there are more occurences of layoffs.
 
-
+<iframe
+src="assets/fig_1a.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
 
 
 ### Univariate Analysis (b)
 The violin plot below shows the distribution of values found in the "Percentage" column of the dataset. The bulk of the percentages lie around the **5-20 range**, with few outliers lie between **60-100**. After further investigation we found that companies that fell within the 60-100 range were **predominantly in the early stages of growth**. These companies often have fewer workers, thus even losing a small number of workers would raise their loss percentage. A high percentage loss of workers in an early-stage company will most likely equal a low-percentage loss of workers in a later-stage company. These findings indicate that an early stage company is **more likely** to face a high-percentage loss of workers.
 
-
+<iframe
+src="assets/fig_1b.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
 
 
 ### Bivariate Analysis (a)
@@ -47,22 +57,43 @@ The graph below correlates the total amount of workers laid off by year and quar
 
 
 >'Q1' : January 1st - March 31st
+>
 >'Q2' : April 1st - June 30th
+>
 >'Q3' : July 1st - September 30th
+>
 >'Q4' : October 1st - December 31st
 
 From the graph below it can be seen that the overall trend of workers laid off seem to have **spiked in 2023 and 2020 during this 4 year period**. There could be a multitude of including broader economic and political factors that cannot be predicted. For instance, the initial shock between 2020 Q1 to 2020 Q3 can be attributed to the emergence of Covid-19 forcing many companies to let go of their employees as a result of economic shock. In 2023 Q1, the spike could be attributed to tech layoffs that resulted from the mass hiring spree that companies went on in the years prior. After further investigation, we have come to the conclusion that the different quarters would not be a useful predictor mainly because of the unpredictability of real life events that may heighten the amount of layoffs in a quarter.
 
-
+<iframe
+src="assets/fig_2a.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
 
 
 ### Bivariate Analysis (b)
 The bar plot below shows the relationship between the categorical column 'Stage' and numerical column 'Laid_Off'. Notably, aside from the  'Acquired', 'Post-IPO', and 'Private Equity' stages, there appears to be a trend of **increaseing numbers of workers laid off as companies mature**. The reason for this trend is because companies often start out with a smaller workforce, and as they grow there is a greater potential for a larger number of workers to be laid off. This figure shows that the company stage can be quite indicitive to how many workers are laid off.
 
-
+<iframe
+src="assets/fig_2b.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
 
 ### Aggregation
 The figure below is a heatmap which represents a pivot table that aggregates the 'Stage', 'Industry' and 'Percentage' columns. Each cell in the heatmap represents the average percentage loss a companies that falls into 1 specific Stage and 1 specific Industry. The heatmap highlights the **intensity** in the relationship between Stage, Industry, and Percent-loss, allowing us to identify patterns among different Industry types and company stages. 
+
+<iframe
+src="assets/fig_agg.html"
+width="1200"
+height="1000"
+frameborder="0"
+></iframe>
+
 
 ### Imputations
 
