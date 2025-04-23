@@ -169,43 +169,14 @@ For our baseline model we created a linear regression model that includes 2 nume
 
 Through our exploratory data analysis we identified these four features as having trends that were worth noting. We speculate that the amount of money a company generates might serve as a strong indicator of its overall health and stability, as companies that generate higher revenues might be less suspectible to increasing layoff percentages. We also speculated that the company stage and industry could hold significant correlational value due to operational challenges that present themselves in each of these specific areas.
 
-<iframe
-src="assets/companySize_After.html"
-width="800"
-height="600"
-frameborder="0"
-></iframe>
+***rmse***: 21.24438856817141 %
 
 ![Baseline](assets/Baseline.png)
 
-```python
-X = tech_layoffs_cleaned[['Money_Raised_in_$_mil', 'Stage', 'Company_Size_before_Layoffs', 'Industry']]
-y = tech_layoffs_cleaned['Percentage']
-X_train, X_test, y_train, y_test = train_test_split(
-   X, y,
-   test_size=0.3,       # 20% test, 80% train
-   random_state=42      # for reproducibility
-)
-CheckPointTransformer = make_column_transformer(
-   (OneHotEncoder(drop='first'), ['Stage']),
-   (OneHotEncoder(drop='first'), ['Industry']),
-)
-model = make_pipeline(
-   CheckPointTransformer,
-   LinearRegression()
-)
-model.fit(X_train, y_train)
-y_pred = model.predict(X_test)
-rmse = np.sqrt(mean_squared_error(y_pred, y_test))
-
-print('rmse:',rmse,'%')
-```
-
-
 ## Final Model
 
+In making improvements to our existing model, we sought to further generalize our model to unseen data. The first step we took was to preprocess our data through feature engineering 2 features. The first feature we engineering was 'Money_Raised_in_$_mil'. We did this by taking the square root in order to reduce skew, a result of the bigger companies in the data set. The second feature we engineered was the 'Company_size_before_layoffs'. We did this by taking the log base 10 of each value, trying to compress the larger values and reducing the outliers in the dataset. After both were engineered, we used StandardScaler() to center the feature and balance the coefficient which is pivotal for Ridge. As for the categorical variables('Industry' and 'Stage'), we kept those consistent with our base model and only OneHotEncoded them. Due to the multicolinear nature of our features (namely the use of 2 OneHotEncoded categorical features), we used Ridge to maintain predictive stability in our linear regression model.
 
-
-
+***rmse***: 19.4234520461352 %
 
 ![Final_Model](assets/FinalModel.png)
